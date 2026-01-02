@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title></title>
+	<meta name="generator" content="LibreOffice 24.8.1.2 (Linux)"/>
+	<meta name="created" content="00:00:00"/>
+	<meta name="changed" content="00:00:00"/>
+	<style type="text/css">
+		@page { size: 8.27in 11.69in; margin: 0.79in }
+		p { line-height: 115%; margin-bottom: 0.1in; background: transparent }
+		pre { background: transparent }
+		pre.western { font-family: "Liberation Mono", monospace; font-size: 10pt }
+		pre.cjk { font-family: "NSimSun", monospace; font-size: 10pt }
+		pre.ctl { font-family: "Liberation Mono", monospace; font-size: 10pt }
+	</style>
+</head>
+<body lang="en-US" link="#000080" vlink="#800000" dir="ltr"><pre class="western">&lt;style&gt;
+    :root {
+        --bg: #050507;
+        --accent: #8a2be2;
+        --glass: rgba(255, 255, 255, 0.03);
+        --glass-border: rgba(255, 255, 255, 0.08);
+    }
+
+    html, body { 
+        background-color: var(--bg) !important; 
+        color: #fff; 
+        margin: 0; padding: 0;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        min-height: 100vh;
+        overflow-x: hidden;
+    }
+
+    /* Fixed ambient glow behind everything */
+    .ambient-glow {
+        position: fixed;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: radial-gradient(circle at 50% -20%, rgba(138, 43, 226, 0.15), transparent 50%);
+        pointer-events: none;
+        z-index: 0;
+    }
+&lt;/style&gt;
+
+&lt;link href=&quot;https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;400;700;800&amp;display=swap&quot; rel=&quot;stylesheet&quot;&gt;
+
+&lt;div class=&quot;ambient-glow&quot;&gt;&lt;/div&gt;
+
+&lt;div class=&quot;content-wrapper&quot;&gt;
+    &lt;nav&gt;
+        &lt;div class=&quot;logo&quot;&gt;KINETIC &lt;span class=&quot;thin&quot;&gt;LAB AI&lt;/span&gt;&lt;/div&gt;
+        &lt;div class=&quot;sys-id&quot;&gt;NODE_088 // STABLE&lt;/div&gt;
+    &lt;/nav&gt;
+
+    &lt;main class=&quot;hero&quot;&gt;
+        &lt;div class=&quot;status-pill&quot;&gt;SYSTEMS ACTIVE&lt;/div&gt;
+        &lt;h1&gt;Cognitive &lt;span&gt;Infrastructure&lt;/span&gt;&lt;/h1&gt;
+        &lt;p&gt;Industrial-grade AI deployment for enterprise hospitality and scheduling workflows.&lt;/p&gt;
+    &lt;/main&gt;
+
+    &lt;section class=&quot;card-grid&quot;&gt;
+        &lt;div class=&quot;glass-card&quot; onmouseenter=&quot;log('Linking Hospitality Core...')&quot; onmouseleave=&quot;log('Ready.')&quot;&gt;
+            &lt;div class=&quot;card-glow&quot;&gt;&lt;/div&gt;
+            &lt;div class=&quot;card-content&quot;&gt;
+                &lt;div class=&quot;icon-header&quot;&gt;🍽️&lt;/div&gt;
+                &lt;h2&gt;Hospitality&lt;/h2&gt;
+                &lt;p&gt;Automated concierge systems with native revenue processing.&lt;/p&gt;
+                &lt;div class=&quot;btn-box&quot;&gt;
+                    &lt;button onclick=&quot;sys('Hospitality')&quot;&gt;INITIALIZE&lt;/button&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&quot;glass-card&quot; onmouseenter=&quot;log('Mapping Temporal Engine...')&quot; onmouseleave=&quot;log('Ready.')&quot;&gt;
+            &lt;div class=&quot;card-glow&quot;&gt;&lt;/div&gt;
+            &lt;div class=&quot;card-content&quot;&gt;
+                &lt;div class=&quot;icon-header&quot;&gt;📅&lt;/div&gt;
+                &lt;h2&gt;Scheduling&lt;/h2&gt;
+                &lt;p&gt;Autonomous planning logic with global timezone synchronization.&lt;/p&gt;
+                &lt;div class=&quot;btn-box&quot;&gt;
+                    &lt;button onclick=&quot;sys('Scheduling')&quot;&gt;INITIALIZE&lt;/button&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&quot;glass-card&quot; onmouseenter=&quot;log('Syncing Knowledge Base...')&quot; onmouseleave=&quot;log('Ready.')&quot;&gt;
+            &lt;div class=&quot;card-glow&quot;&gt;&lt;/div&gt;
+            &lt;div class=&quot;card-content&quot;&gt;
+                &lt;div class=&quot;icon-header&quot;&gt;💬&lt;/div&gt;
+                &lt;h2&gt;Support&lt;/h2&gt;
+                &lt;p&gt;Neural retrieval agents for 24/7 instant enterprise resolution.&lt;/p&gt;
+                &lt;div class=&quot;btn-box&quot;&gt;
+                    &lt;button onclick=&quot;sys('Support')&quot;&gt;INITIALIZE&lt;/button&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;footer&gt;
+        &lt;div id=&quot;terminal-out&quot;&gt;&gt; KINETIC_OS_v11: AWAITING_COMMAND&lt;/div&gt;
+    &lt;/footer&gt;
+&lt;/div&gt;
+
+&lt;style&gt;
+    .content-wrapper { position: relative; z-index: 1; }
+
+    nav { padding: 40px 8%; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; letter-spacing: 4px; font-size: 0.9rem; }
+    .logo .thin { font-weight: 200; opacity: 0.5; }
+    .sys-id { font-family: monospace; font-size: 0.6rem; color: #444; letter-spacing: 2px; }
+
+    .hero { text-align: center; padding: 60px 8% 40px; }
+    .status-pill { display: inline-block; padding: 4px 12px; border: 1px solid var(--accent); color: var(--accent); border-radius: 100px; font-size: 0.6rem; font-weight: 800; letter-spacing: 2px; margin-bottom: 20px; }
+    .hero h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 200; margin: 0; letter-spacing: -2px; }
+    .hero h1 span { font-weight: 800; background: linear-gradient(to bottom, #fff, #888); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero p { color: #666; max-width: 500px; margin: 20px auto 0; font-size: 1.1rem; line-height: 1.5; }
+
+    /* The Grid &amp; Glass Cards */
+    .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; padding: 40px 8%; }
+
+    .glass-card {
+        position: relative;
+        background: var(--glass);
+        border: 1px solid var(--glass-border);
+        border-radius: 24px;
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        overflow: hidden;
+        transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .glass-card:hover {
+        transform: translateY(-5px);
+        border-color: rgba(138, 43, 226, 0.4);
+    }
+
+    /* Moving Card Highlight */
+    .card-glow {
+        position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(138, 43, 226, 0.15) 0%, transparent 60%);
+        pointer-events: none; opacity: 0; transition: opacity 0.3s;
+    }
+    .glass-card:hover .card-glow { opacity: 1; }
+
+    .card-content { padding: 40px; position: relative; z-index: 2; }
+    .icon-header { font-size: 2rem; margin-bottom: 20px; opacity: 0.8; }
+    .glass-card h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 10px; letter-spacing: -0.5px; }
+    .glass-card p { color: #888; font-size: 0.95rem; line-height: 1.6; margin-bottom: 30px; }
+
+    button {
+        width: 100%; padding: 14px; background: #fff; color: #000; border: none; 
+        border-radius: 12px; font-weight: 800; font-size: 0.7rem; cursor: pointer;
+        letter-spacing: 1.5px; transition: 0.3s;
+    }
+    button:hover { background: var(--accent); color: #fff; box-shadow: 0 10px 20px rgba(138, 43, 226, 0.2); }
+
+    footer { padding: 40px 8%; border-top: 1px solid var(--border); }
+    #terminal-out { font-family: monospace; font-size: 0.7rem; color: var(--accent); letter-spacing: 1px; }
+&lt;/style&gt;
+
+&lt;script&gt;
+    // Tracking mouse for the glass glow effect
+    document.querySelectorAll('.glass-card').forEach(card =&gt; {
+        card.addEventListener('mousemove', e =&gt; {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            card.style.setProperty('--mouse-x', `${x}px`);
+            card.style.setProperty('--mouse-y', `${y}px`);
+        });
+    });
+
+    function log(msg) { document.getElementById('terminal-out').innerText = &quot;&gt; &quot; + msg; }
+    function sys(mod) {
+        log(`AUTHORIZING NODE [${mod.toUpperCase()}]... SUCCESS.`);
+        setTimeout(() =&gt; alert(`Secure connection established: ${mod} Neural Link.`), 200);
+    }
+&lt;/script&gt;</pre>
+</body>
+</html>
