@@ -1,214 +1,172 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-	<title></title>
-	<meta name="generator" content="LibreOffice 24.8.1.2 (Linux)"/>
-	<meta name="created" content="00:00:00"/>
-	<meta name="changed" content="00:00:00"/>
-	<style type="text/css">
-		@page { size: 8.27in 11.69in; margin: 0.79in }
-		p { line-height: 115%; margin-bottom: 0.1in; background: transparent }
-		pre { background: transparent }
-		pre.western { font-family: "Liberation Mono", monospace; font-size: 10pt }
-		pre.cjk { font-family: "NSimSun", monospace; font-size: 10pt }
-		pre.ctl { font-family: "Liberation Mono", monospace; font-size: 10pt }
-	</style>
-	/* MOBILE OPTIMIZATION OVERRIDE */
-@media (max-width: 768px) {
-    nav {
-        padding: 20px 5%;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KINETIC LABS AI | Hospitality Economy</title>
     
-    .hero {
-        padding: 40px 5% 20px;
-    }
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
 
-    .hero h1 {
-        font-size: 2.8rem; /* Scaled down for mobile screens */
-        line-height: 1.1;
-    }
+    <style>
+        :root { 
+            --bg: #020408; 
+            --blue: #4facfe;
+            --purple: #a855f7;
+            --glass: rgba(255, 255, 255, 0.05); 
+            --border: rgba(255, 255, 255, 0.1); 
+        }
 
-    .card-grid {
-        grid-template-columns: 1fr; /* Force cards to stack in a single column */
-        padding: 20px 5%;
-        gap: 15px;
-    }
+        body, html { margin: 0; padding: 0; background-color: var(--bg); color: white; font-family: 'Montserrat', sans-serif; overflow-x: hidden; min-height: 100vh; }
 
-    .glass-card {
-        border-radius: 16px; /* Slightly tighter corners for smaller screens */
-    }
+        /* Animated Nebula Background */
+        .nebula-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;
+            background: 
+                radial-gradient(circle at 10% 50%, rgba(79, 172, 254, 0.2), transparent 50%),
+                radial-gradient(circle at 90% 50%, rgba(168, 85, 247, 0.2), transparent 50%);
+            background-size: 200% 200%;
+            animation: drift 15s ease-in-out infinite alternate;
+        }
+        @keyframes drift { 0% { background-position: 0% 50%; } 100% { background-position: 20% 50%; } }
 
-    .card-content {
-        padding: 30px 20px;
-    }
+        .content-layer { position: relative; z-index: 10; display: flex; flex-direction: column; align-items: center; padding-bottom: 100px; }
 
-    footer {
-        padding: 20px 5%;
-    }
-}
+        header { width: 100%; padding: 20px 0; text-align: center; border-bottom: 1px solid var(--border); backdrop-filter: blur(15px); }
+        .header-logo { height: 45px; vertical-align: middle; margin-right: 12px; }
+        .logo-text { font-weight: 900; letter-spacing: 5px; font-size: 1.1rem; text-transform: uppercase; }
 
+        h1 { font-size: clamp(1.5rem, 6vw, 2.5rem); font-weight: 900; text-transform: uppercase; letter-spacing: 8px; margin: 50px 0 10px; text-align: center; }
+        .subtitle { color: var(--blue); letter-spacing: 3px; font-size: 0.8rem; margin-bottom: 40px; text-transform: uppercase; }
+
+        .grid { display: flex; gap: 25px; padding: 20px; flex-wrap: wrap; justify-content: center; max-width: 1300px; }
+        
+        .card { 
+            width: 350px; background: var(--glass); backdrop-filter: blur(25px); 
+            border: 1px solid var(--border); border-top: 1px solid rgba(79, 172, 254, 0.4); 
+            border-radius: 20px; padding: 35px 25px; text-align: center; display: flex; flex-direction: column;
+        }
+
+        .price-tag { font-size: 1.5rem; font-weight: 900; color: var(--blue); margin: 15px 0; }
+        .price-tag span { font-size: 0.8rem; color: #777; font-weight: 400; }
+
+        .btn { 
+            background: transparent; border: 1px solid var(--blue); color: white; 
+            padding: 12px 20px; border-radius: 5px; cursor: pointer; text-transform: uppercase; 
+            font-weight: bold; transition: 0.3s; margin-top: auto;
+        }
+        .btn:hover { background: var(--blue); color: black; box-shadow: 0 0 20px var(--blue); }
+
+        /* CHAT WINDOW */
+        #bot-window-container { height: 0; overflow: hidden; transition: all 0.6s ease; width: 100%; margin-top: 20px; position: relative; }
+        .fake-chat { width: 100%; height: 450px; background: rgba(0,0,0,0.95); border: 1px solid var(--blue); border-radius: 12px; display: flex; flex-direction: column; text-align: left; font-size: 0.8rem; }
+        #chat-body { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
+
+        .msg { padding: 10px 12px; border-radius: 8px; max-width: 85%; line-height: 1.4; }
+        .bot-msg { background: rgba(79, 172, 254, 0.1); border: 1px solid rgba(79, 172, 254, 0.2); align-self: flex-start; }
+        .user-sim { background: rgba(168, 85, 247, 0.1); border: 1px solid rgba(168, 85, 247, 0.2); align-self: flex-end; }
+
+        #payment-modal {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: #000; z-index: 100; display: none; flex-direction: column;
+            align-items: center; justify-content: center; padding: 20px; text-align: center; border-radius: 12px;
+        }
+    </style>
 </head>
-<body lang="en-US" link="#000080" vlink="#800000" dir="ltr"><pre class="western">&lt;style&gt;
-    :root {
-        --bg: #050507;
-        --accent: #8a2be2;
-        --glass: rgba(255, 255, 255, 0.03);
-        --glass-border: rgba(255, 255, 255, 0.08);
-    }
+<body>
 
-    html, body { 
-        background-color: var(--bg) !important; 
-        color: #fff; 
-        margin: 0; padding: 0;
-        font-family: 'Plus Jakarta Sans', sans-serif;
-        min-height: 100vh;
-        overflow-x: hidden;
-    }
+    <div class="nebula-bg"></div>
 
-    /* Fixed ambient glow behind everything */
-    .ambient-glow {
-        position: fixed;
-        top: 0; left: 0; width: 100%; height: 100%;
-        background: radial-gradient(circle at 50% -20%, rgba(138, 43, 226, 0.15), transparent 50%);
-        pointer-events: none;
-        z-index: 0;
-    }
-&lt;/style&gt;
+    <div class="content-layer">
+        <header>
+            <img src="logo.png" alt="Logo" class="header-logo">
+            <span class="logo-text">KINETIC LABS AI</span>
+        </header>
 
-&lt;link href=&quot;https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;400;700;800&amp;display=swap&quot; rel=&quot;stylesheet&quot;&gt;
+        <h1>Hospitality Agents</h1>
+        <div class="subtitle">Autonomous Economy Tier</div>
 
-&lt;div class=&quot;ambient-glow&quot;&gt;&lt;/div&gt;
+        <div class="grid">
+            <div class="card">
+                <h3>Starter Tier</h3>
+                <p>Essential Guest FAQ & Automated Reservations.</p>
+                <div class="price-tag">$150<span>/mo</span></div>
+                <p style="font-size: 0.7rem; color: #888;">+ $200 Setup Fee</p>
+                <button class="btn" onclick="startDemo('Starter', 200, 150)">Deploy Starter</button>
+            </div>
 
-&lt;div class=&quot;content-wrapper&quot;&gt;
-    &lt;nav&gt;
-        &lt;div class=&quot;logo&quot;&gt;KINETIC &lt;span class=&quot;thin&quot;&gt;LAB AI&lt;/span&gt;&lt;/div&gt;
-        &lt;div class=&quot;sys-id&quot;&gt;NODE_088 // STABLE&lt;/div&gt;
-    &lt;/nav&gt;
+            <div class="card">
+                <h3>Business Tier</h3>
+                <p>Full Menu Ordering & Payment Integration.</p>
+                <div class="price-tag">$250<span>/mo</span></div>
+                <p style="font-size: 0.7rem; color: #888;">+ $400 Setup Fee</p>
+                <button class="btn" onclick="startDemo('Business', 400, 250)">Deploy Business</button>
+            </div>
 
-    &lt;main class=&quot;hero&quot;&gt;
-        &lt;div class=&quot;status-pill&quot;&gt;SYSTEMS ACTIVE&lt;/div&gt;
-        &lt;h1&gt;Cognitive &lt;span&gt;Infrastructure&lt;/span&gt;&lt;/h1&gt;
-        &lt;p&gt;Industrial-grade AI deployment for enterprise hospitality and scheduling workflows.&lt;/p&gt;
-    &lt;/main&gt;
+            <div class="card">
+                <h3>Enterprise Tier</h3>
+                <p>Custom Neural Training & 24/7 Priority Support.</p>
+                <div class="price-tag">$450<span>/mo</span></div>
+                <p style="font-size: 0.7rem; color: #888;">+ $600 Setup Fee</p>
+                <button class="btn" onclick="startDemo('Enterprise', 600, 450)">Deploy Enterprise</button>
+            </div>
+        </div>
 
-    &lt;section class=&quot;card-grid&quot;&gt;
-        &lt;div class=&quot;glass-card&quot; onmouseenter=&quot;log('Linking Hospitality Core...')&quot; onmouseleave=&quot;log('Ready.')&quot;&gt;
-            &lt;div class=&quot;card-glow&quot;&gt;&lt;/div&gt;
-            &lt;div class=&quot;card-content&quot;&gt;
-                &lt;div class=&quot;icon-header&quot;&gt;🍽️&lt;/div&gt;
-                &lt;h2&gt;Hospitality&lt;/h2&gt;
-                &lt;p&gt;Automated concierge systems with native revenue processing.&lt;/p&gt;
-                &lt;div class=&quot;btn-box&quot;&gt;
-                    &lt;button onclick=&quot;sys('Hospitality')&quot;&gt;INITIALIZE&lt;/button&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
+        <div id="bot-window-container" style="max-width: 500px; margin: 40px auto;">
+            <div id="payment-modal">
+                <h3 id="pay-title" style="color:var(--purple);">SECURE CHECKOUT</h3>
+                <p id="pay-desc" style="font-size: 0.8rem; margin-bottom: 20px; color: #ccc;"></p>
+                <button class="btn" style="width: 100%; background: var(--purple); border:none;" onclick="alert('Redirecting to real payment...')">Pay & Deploy Now</button>
+            </div>
+            <div class="fake-chat">
+                <div id="chat-body"></div>
+            </div>
+        </div>
+    </div>
 
-        &lt;div class=&quot;glass-card&quot; onmouseenter=&quot;log('Mapping Temporal Engine...')&quot; onmouseleave=&quot;log('Ready.')&quot;&gt;
-            &lt;div class=&quot;card-glow&quot;&gt;&lt;/div&gt;
-            &lt;div class=&quot;card-content&quot;&gt;
-                &lt;div class=&quot;icon-header&quot;&gt;📅&lt;/div&gt;
-                &lt;h2&gt;Scheduling&lt;/h2&gt;
-                &lt;p&gt;Autonomous planning logic with global timezone synchronization.&lt;/p&gt;
-                &lt;div class=&quot;btn-box&quot;&gt;
-                    &lt;button onclick=&quot;sys('Scheduling')&quot;&gt;INITIALIZE&lt;/button&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
+    <script>
+        const chatBody = document.getElementById('chat-body');
+        const container = document.getElementById("bot-window-container");
+        const payModal = document.getElementById("payment-modal");
 
-        &lt;div class=&quot;glass-card&quot; onmouseenter=&quot;log('Syncing Knowledge Base...')&quot; onmouseleave=&quot;log('Ready.')&quot;&gt;
-            &lt;div class=&quot;card-glow&quot;&gt;&lt;/div&gt;
-            &lt;div class=&quot;card-content&quot;&gt;
-                &lt;div class=&quot;icon-header&quot;&gt;💬&lt;/div&gt;
-                &lt;h2&gt;Support&lt;/h2&gt;
-                &lt;p&gt;Neural retrieval agents for 24/7 instant enterprise resolution.&lt;/p&gt;
-                &lt;div class=&quot;btn-box&quot;&gt;
-                    &lt;button onclick=&quot;sys('Support')&quot;&gt;INITIALIZE&lt;/button&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/section&gt;
+        function startDemo(tier, setup, monthly) {
+            const total = setup + monthly;
+            payModal.style.display = "none";
+            container.style.height = "500px";
+            chatBody.innerHTML = ""; 
 
-    &lt;footer&gt;
-        &lt;div id=&quot;terminal-out&quot;&gt;&gt; KINETIC_OS_v11: AWAITING_COMMAND&lt;/div&gt;
-    &lt;/footer&gt;
-&lt;/div&gt;
+            const script = [
+                { type: 'bot', text: `Kinetic System Online. Initializing ${tier} Hospitality Agent.` },
+                { type: 'bot', text: `This package includes specialized training for your business. Costs: $${setup} Setup + $${monthly}/mo.` },
+                { type: 'user', text: `I want the ${tier} package. Let's start.` },
+                { type: 'bot', text: `Confirmed. Total due for initial deployment and training: $${total}.00.` },
+                { type: 'bot', text: `Do you authorize this charge and the deployment of the ${tier} Neural Core?` },
+                { type: 'user', text: "I authorize. Open the secure portal." },
+                { type: 'trigger-pay' }
+            ];
 
-&lt;style&gt;
-    .content-wrapper { position: relative; z-index: 1; }
+            playScript(script, 0, total);
+        }
 
-    nav { padding: 40px 8%; display: flex; justify-content: space-between; align-items: center; }
-    .logo { font-weight: 800; letter-spacing: 4px; font-size: 0.9rem; }
-    .logo .thin { font-weight: 200; opacity: 0.5; }
-    .sys-id { font-family: monospace; font-size: 0.6rem; color: #444; letter-spacing: 2px; }
-
-    .hero { text-align: center; padding: 60px 8% 40px; }
-    .status-pill { display: inline-block; padding: 4px 12px; border: 1px solid var(--accent); color: var(--accent); border-radius: 100px; font-size: 0.6rem; font-weight: 800; letter-spacing: 2px; margin-bottom: 20px; }
-    .hero h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 200; margin: 0; letter-spacing: -2px; }
-    .hero h1 span { font-weight: 800; background: linear-gradient(to bottom, #fff, #888); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .hero p { color: #666; max-width: 500px; margin: 20px auto 0; font-size: 1.1rem; line-height: 1.5; }
-
-    /* The Grid &amp; Glass Cards */
-    .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; padding: 40px 8%; }
-
-    .glass-card {
-        position: relative;
-        background: var(--glass);
-        border: 1px solid var(--glass-border);
-        border-radius: 24px;
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        overflow: hidden;
-        transition: transform 0.3s ease, border-color 0.3s ease;
-    }
-
-    .glass-card:hover {
-        transform: translateY(-5px);
-        border-color: rgba(138, 43, 226, 0.4);
-    }
-
-    /* Moving Card Highlight */
-    .card-glow {
-        position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-        background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(138, 43, 226, 0.15) 0%, transparent 60%);
-        pointer-events: none; opacity: 0; transition: opacity 0.3s;
-    }
-    .glass-card:hover .card-glow { opacity: 1; }
-
-    .card-content { padding: 40px; position: relative; z-index: 2; }
-    .icon-header { font-size: 2rem; margin-bottom: 20px; opacity: 0.8; }
-    .glass-card h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 10px; letter-spacing: -0.5px; }
-    .glass-card p { color: #888; font-size: 0.95rem; line-height: 1.6; margin-bottom: 30px; }
-
-    button {
-        width: 100%; padding: 14px; background: #fff; color: #000; border: none; 
-        border-radius: 12px; font-weight: 800; font-size: 0.7rem; cursor: pointer;
-        letter-spacing: 1.5px; transition: 0.3s;
-    }
-    button:hover { background: var(--accent); color: #fff; box-shadow: 0 10px 20px rgba(138, 43, 226, 0.2); }
-
-    footer { padding: 40px 8%; border-top: 1px solid var(--border); }
-    #terminal-out { font-family: monospace; font-size: 0.7rem; color: var(--accent); letter-spacing: 1px; }
-&lt;/style&gt;
-
-&lt;script&gt;
-    // Tracking mouse for the glass glow effect
-    document.querySelectorAll('.glass-card').forEach(card =&gt; {
-        card.addEventListener('mousemove', e =&gt; {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            card.style.setProperty('--mouse-x', `${x}px`);
-            card.style.setProperty('--mouse-y', `${y}px`);
-        });
-    });
-
-    function log(msg) { document.getElementById('terminal-out').innerText = &quot;&gt; &quot; + msg; }
-    function sys(mod) {
-        log(`AUTHORIZING NODE [${mod.toUpperCase()}]... SUCCESS.`);
-        setTimeout(() =&gt; alert(`Secure connection established: ${mod} Neural Link.`), 200);
-    }
-&lt;/script&gt;</pre>
+        function playScript(script, index, total) {
+            if (index < script.length) {
+                const item = script[index];
+                if(item.type === 'trigger-pay') {
+                    setTimeout(() => { 
+                        document.getElementById('pay-desc').innerHTML = `Total for Deployment: <b>$${total}.00</b>`;
+                        payModal.style.display = "flex"; 
+                    }, 1500);
+                    return;
+                }
+                setTimeout(() => {
+                    const msgDiv = document.createElement('div');
+                    msgDiv.className = item.type === 'bot' ? 'msg bot-msg' : 'msg user-sim';
+                    msgDiv.innerText = item.text;
+                    chatBody.appendChild(msgDiv);
+                    chatBody.scrollTop = chatBody.scrollHeight;
+                    playScript(script, index + 1, total);
+                }, 1800); 
+            }
+        }
+    </script>
 </body>
 </html>
